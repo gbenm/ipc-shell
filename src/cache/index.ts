@@ -3,12 +3,12 @@ import { IPCNode } from "../models/ipcnode"
 export class IPCNodeRegister {
   private static ipcNodes: { [key: string]: IPCNode } = {}
 
-  public static register(name: string, ipc: IPCNode) {
-    if (this.ipcNodes[name]) {
+  public static register(ipc: IPCNode) {
+    if (this.ipcNodes[ipc.name]) {
       throw new Error(`IPCNode ${name} already registered`)
     }
 
-    this.ipcNodes[name] = ipc
+    this.ipcNodes[ipc.name] = ipc
   }
 
   public static get(name: string): IPCNode {
