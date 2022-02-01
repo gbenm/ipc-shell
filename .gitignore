@@ -1,4 +1,5 @@
 node_modules/
+dist/
 # YARN
 /.yarn/*
 !/.yarn/patches
