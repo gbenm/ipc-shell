@@ -1,6 +1,5 @@
 import { expect } from "chai"
-import { IPCNodeRegister } from "../src/cache"
-import { IPCNode } from "../src/models"
+import { IPCNodeRegister, IPCNode } from "../dist"
 
 describe("IPC Cache", () => {
   it ("Get registered ipc", () => {
