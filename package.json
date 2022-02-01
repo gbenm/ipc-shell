@@ -1,6 +1,7 @@
 {
   "name": "ipc-electron",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "packageManager": "yarn@3.1.1",
   "scripts": {
     "compile": "tsc",
