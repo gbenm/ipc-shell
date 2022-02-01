@@ -1,4 +1,5 @@
 {
+  "version": "0.0.0",
   "name": "ipc-electron",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
