@@ -30,7 +30,7 @@ export class IPCNodeWritable extends Writable {
 export type IPCNode<T = unknown> = IPCBaseNode & T
 
 function handleDataOrError<D, E>(this: IPCNode, handlers: IPCHandlers<D, E>, ...args: unknown[]) {
-  args = this._getArgsFromOn(args)
+  args = this._getArgsFromOn(...args)
 
   const firstArg = args[0]
 
