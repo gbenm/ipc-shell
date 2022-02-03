@@ -1,11 +1,12 @@
 {
+  "version": "0.0.0",
   "name": "ipc-electron",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "packageManager": "yarn@3.1.1",
   "scripts": {
     "compile": "tsc",
-    "compile:watch": "tsc --watch",
+    "dev": "tsc --watch",
     "lint": "eslint . --ext .ts",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'"
   },
