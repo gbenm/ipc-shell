@@ -34,8 +34,8 @@ function handleDataOrError<D, E>(this: IPCNode, handlers: IPCHandlers<D, E>, ...
 
   const firstArg = args[0]
 
-  if (firstArg instanceof IPCNodeError) {
-    handlers.handleError?.(firstArg.info as E)
+  if (firstArg instanceof Error && IPCNodeError.isIPCNodeError(firstArg.message)) {
+    handlers.handleError?.(IPCNodeError.getInfoFromString(firstArg.message) as E)
     return
   }
 
@@ -58,8 +58,8 @@ export const ipcNode: IPCBaseNode = {
   _ipcNodeSend(this: IPCElectron, channel, ...args) {
     this.send(channel, ...args)
   },
-  sendError(this: IPCNode<EventEmitter>, channel, info, message) {
-    this._ipcNodeSend(channel, new IPCNodeError(channel, info, message))
+  sendError(this: IPCNode<EventEmitter>, channel, info) {
+    this._ipcNodeSend(channel, new IPCNodeError(info))
   },
   writableStream(this: IPCNode<EventEmitter>, channel) {
     return new IPCNodeWritable(channel, this)
