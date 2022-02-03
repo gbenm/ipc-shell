@@ -42,11 +42,11 @@ IPC mediante su nombre:
 import { IpcMain } from 'electron';
 import { IPCNodeRegister } from "ipc-shell"
 
+// using generic type (recommended)
+const ipc = IPCNodeRegister.get<IpcMain>("main");
+
 // using IPCNode type (import from ipc-shell)
 const ipc: IPCNode<IpcMain> = IPCNodeRegister.get("main");
-
-// using generic type
-const ipc = IPCNodeRegister.get<IpcMain>("main");
 ```
 
 El hecho de que se agregue `IpcMain` es para que pueda
