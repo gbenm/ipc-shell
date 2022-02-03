@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.0.0",
   "name": "ipc-shell",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
