@@ -1,38 +1,26 @@
 import { expect } from "chai"
-import { IPCNodeRegister, IPCNodeBuilder } from "../dist"
+import { IPCNodeRegister, IPCNodeOnDuplicateAction } from "../dist"
 
 describe("IPC Cache", () => {
   it ("Get registered ipc", () => {
-    const ipcBuilder = new IPCNodeBuilder()
-    const ipc = ipcBuilder
-      .setName("test")
-      .build()
 
-    IPCNodeRegister.register(ipc)
-    expect(IPCNodeRegister.get("test")).to.equal(ipc)
+    IPCNodeRegister.register("test", process)
+    expect(IPCNodeRegister.get("test")).to.equal(process)
   })
 
   it ("Get multiple registered ipcs", () => {
-    const ipcBuilder = new IPCNodeBuilder()
     const ipcs = Array(20).fill(0).map(
-      (_, i) => ipcBuilder
-        .reset()
-        .setName(`multiple-${i+1}`)
-        .build()
+      () => Object.create(process)
     )
 
-    ipcs.forEach((ipc) => IPCNodeRegister.register(ipc))
+    ipcs.forEach((ipc, i) => IPCNodeRegister.register(`multiple-${i+1}`, ipc))
 
     ipcs.forEach((ipc, i) => expect(IPCNodeRegister.get(`multiple-${i+1}`)).to.equal(ipc))
   })
 
   it ("Throw error if register twice", () => {
-    const ipc = new IPCNodeBuilder()
-      .setName("test-twice")
-      .build()
-
-    IPCNodeRegister.register(ipc)
-    expect(() => IPCNodeRegister.register(ipc)).to.throw(Error)
+    IPCNodeRegister.register("test-twice", process)
+    expect(() => IPCNodeRegister.register("test-twice", process, IPCNodeOnDuplicateAction.error)).to.throw(Error)
   })
 
   it ("Throw error getting ipcNode not registered", () => {
