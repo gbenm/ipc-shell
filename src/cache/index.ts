@@ -18,6 +18,10 @@ export class IPCNodeRegister {
     ipc: T,
     onDuplicate: IPCNodeOnDuplicateAction = IPCNodeOnDuplicateAction.ignore
   ): IPCNode<T> {
+    if (!ipc) {
+      throw new Error(`Can't extend ${ipc} with name ${name}`)
+    }
+
     if (this.ipcNodes[name] && onDuplicate === IPCNodeOnDuplicateAction.error) {
       throw new Error(`IPCNode ${name} already registered`)
     }
