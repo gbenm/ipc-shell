@@ -22,14 +22,25 @@ describe("IPC Cache", () => {
   it ("Throw error if register twice (action error)", () => {
     const ipc = { name: "test-twice-error" }
 
-    IPCNodeRegister.register(ipc.name, process)
-    expect(() => IPCNodeRegister.register(ipc.name, process, IPCNodeOnDuplicateAction.error)).to.throw(Error)
+    IPCNodeRegister.register(ipc.name, ipc)
+    expect(() => IPCNodeRegister.register(ipc.name, ipc, IPCNodeOnDuplicateAction.error)).to.throw(Error)
   })
 
-  it ("No throw error if register twice (action ignore)", () => {
+  describe ("No throw error if register twice (action ignore)", () => {
     const ipc = { name: "test-twice-ignore" }
-    IPCNodeRegister.register(ipc.name, process)
-    expect(() => IPCNodeRegister.register(ipc.name, process, IPCNodeOnDuplicateAction.ignore)).to.not.throw(Error)
+    IPCNodeRegister.register(ipc.name, ipc)
+
+    const ipc2 = { value: 2 }
+
+    it ("No error", () => {
+      expect(() => {
+        IPCNodeRegister.register(ipc.name, ipc2, IPCNodeOnDuplicateAction.ignore)
+      }).to.not.throw(Error)
+    })
+
+    it ("No replace", () => {
+      expect(IPCNodeRegister.get(ipc.name)).to.equal(ipc)
+    })
   })
 
   it ("Replace if register twice (action replace)", () => {
