@@ -19,42 +19,44 @@ describe("IPC Cache", () => {
     ipcs.forEach((ipc) => expect(IPCNodeRegister.get(ipc.name)).to.equal(ipc))
   })
 
-  it ("Throw error if register twice (action error)", () => {
-    const ipc = { name: "test-twice-error" }
+  describe("Register twice", () => {
+    it ("Throw error (action error)", () => {
+      const ipc = { name: "test-twice-error" }
 
-    IPCNodeRegister.register(ipc.name, ipc)
-    expect(() => IPCNodeRegister.register(ipc.name, ipc, IPCNodeOnDuplicateAction.error)).to.throw(Error)
-  })
-
-  describe ("No throw error if register twice (action ignore)", () => {
-    const ipc = { name: "test-twice-ignore" }
-    IPCNodeRegister.register(ipc.name, ipc)
-
-    const ipc2 = { value: 2 }
-
-    it ("No error", () => {
-      expect(() => {
-        IPCNodeRegister.register(ipc.name, ipc2, IPCNodeOnDuplicateAction.ignore)
-      }).to.not.throw(Error)
+      IPCNodeRegister.register(ipc.name, ipc)
+      expect(() => IPCNodeRegister.register(ipc.name, ipc, IPCNodeOnDuplicateAction.error)).to.throw(Error)
     })
 
-    it ("No replace", () => {
-      expect(IPCNodeRegister.get(ipc.name)).to.equal(ipc)
+    describe ("No throw error (action ignore)", () => {
+      const ipc = { name: "test-twice-ignore" }
+      IPCNodeRegister.register(ipc.name, ipc)
+
+      const ipc2 = { value: 2 }
+
+      it ("No error", () => {
+        expect(() => {
+          IPCNodeRegister.register(ipc.name, ipc2, IPCNodeOnDuplicateAction.ignore)
+        }).to.not.throw(Error)
+      })
+
+      it ("No replace", () => {
+        expect(IPCNodeRegister.get(ipc.name)).to.equal(ipc)
+      })
     })
-  })
 
-  it ("Replace if register twice (action replace)", () => {
-    const ipcName = "test-twice-replace"
+    it ("Replace (action replace)", () => {
+      const ipcName = "test-twice-replace"
 
-    const ipc = { value: "i'm a IPC" }
+      const ipc = { value: "i'm a IPC" }
 
-    IPCNodeRegister.register(ipcName, ipc)
+      IPCNodeRegister.register(ipcName, ipc)
 
-    const anotherIpc = { value: "i'm another IPC" }
+      const anotherIpc = { value: "i'm another IPC" }
 
-    IPCNodeRegister.register(ipcName, anotherIpc, IPCNodeOnDuplicateAction.replace)
+      IPCNodeRegister.register(ipcName, anotherIpc, IPCNodeOnDuplicateAction.replace)
 
-    expect(IPCNodeRegister.get(ipcName)).to.equal(anotherIpc)
+      expect(IPCNodeRegister.get(ipcName)).to.equal(anotherIpc)
+    })
   })
 
   it ("Throw error if register falsy values", () => {
