@@ -1,6 +1,6 @@
 import { EventEmitter } from "stream"
-import { IPCBaseNode, IPCNode, IPCHandlers } from "@ipc/interfaces"
-import { IPCNodeError, IPCNodeWritable } from "@ipc/models"
+import { IPCBaseNode, IPCNode, IPCHandlers } from "../interfaces"
+import { IPCNodeError, IPCNodeWritable } from "../models"
 
 type IPCWWithChannels = {
   send: (channel: string, ...args: unknown[]) => void

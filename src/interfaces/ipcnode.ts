@@ -1,5 +1,5 @@
-import { IPCNodeWritable } from "@ipc/models"
-import { IPCHandlers } from "@ipc/interfaces"
+import { IPCNodeWritable } from "../models"
+import { IPCHandlers } from "../interfaces"
 
 /**
  * Declare the extensions that will be added to the IPC Object

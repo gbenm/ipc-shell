@@ -1,5 +1,5 @@
-import { IPCNode } from "@ipc/interfaces"
-import { ipcNode } from "@ipc/implementations"
+import { IPCNode } from "../interfaces"
+import { ipcNode } from "../implementations"
 import { IPCNodeMod } from "./ipcmod"
 
 export enum IPCNodeOnDuplicateAction {

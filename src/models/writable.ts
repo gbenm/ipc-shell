@@ -1,5 +1,5 @@
 import { Writable } from "stream"
-import { IPCBaseNode } from "@ipc/interfaces"
+import { IPCBaseNode } from "../interfaces"
 
 export class IPCNodeWritable extends Writable {
   constructor(
