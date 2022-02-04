@@ -6,11 +6,15 @@
     "emitDecoratorMetadata": true,
     "declaration": true,
     "outDir": "dist",
-    "strict": true
-  },
-  "paths": {
-    "@/*": [
-      "src/*"
+    "strict": true,
+    "baseUrl": "src",
+    "paths": {
+      "@ipc/*": [
+        "*"
+      ]
+    },
+    "plugins": [
+      {"transform": "typescript-transform-paths"}
     ]
   },
   "include": ["src"],

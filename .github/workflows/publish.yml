@@ -15,7 +15,7 @@ jobs:
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
       - run: yarn
-      - run: yarn compile
+      - run: yarn build
       - run: yarn test
       - run: npm publish
         env:

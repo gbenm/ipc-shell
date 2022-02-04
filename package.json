@@ -16,8 +16,8 @@
   "homepage": "https://github.com/gbenm/ipc-shell",
   "packageManager": "yarn@3.1.1",
   "scripts": {
-    "compile": "tsc",
-    "dev": "tsc --watch",
+    "build": "ttsc",
+    "dev": "ttsc --watch",
     "lint": "eslint . --ext .ts",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'"
   },
@@ -32,7 +32,9 @@
     "eslint": "^8.8.0",
     "mocha": "^9.2.0",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.5"
+    "ttypescript": "^1.5.13",
+    "typescript": "^4.5.5",
+    "typescript-transform-paths": "^3.3.1"
   },
   "files": [
     "dist"
