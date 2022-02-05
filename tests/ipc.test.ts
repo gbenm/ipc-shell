@@ -178,4 +178,48 @@ describe("IPC communication", () => {
       })
     })
   })
+
+  describe ("readableStream method", () => {
+    it ("unique message", (done) => {
+      const [ipc, timeout] = createIPC()
+
+      ipc.once("message", () => {
+        const readable = ipc.readableStream("message")
+
+        readable.once("data", (message) => {
+          expect(message).to.equal("pong")
+          clearTimeout(timeout)
+          ipc.kill()
+          done()
+        })
+
+        ipc.send("ping")
+      })
+    })
+
+    it ("multiple messages", (done) => {
+      const [ipc, timeout] = createIPC()
+      const maxCounter = 10
+      let counter = 0
+
+      ipc.once("message", () => {
+        const readable = ipc.readableStream("message")
+
+        readable.on("data", (message) => {
+          counter++
+          expect(message).to.equal("pong")
+          
+          if (counter == maxCounter) {
+            clearTimeout(timeout)
+            ipc.kill()
+            done()
+          }
+        })
+
+        for (let i = 0; i < maxCounter; i++) {
+          ipc.send("ping")
+        }
+      })
+    })
+  })
 })
