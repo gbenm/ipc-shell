@@ -1,0 +1,60 @@
+site_name: IPC Shell
+site_description: A wrapper for the IPC
+site_author: Josué Galeano
+site_url: https://gbenm.github.io
+
+repo_name: ipc-shell
+repo_url: https://github.com/gbenm/ipc-shell
+
+theme:
+  name: material
+  language: es
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - scheme: slate
+      primary: blue grey
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: default
+      primary: blue grey
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  features:
+    - navigation.instant
+    - navigation.tabs
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - admonition
+  - pymdownx.details
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      name: GitHub
+      link: https://github.com/gbenm
+  alternate:
+    - name: English
+      link: ./en/
+      lang: en
+    - name: Español
+      link: ./es/
+      lang: es
+
+plugins:
+  - search
+  - i18n:
+      default_language: es
+      languages:
+        en: english
+        es: español
+      material_alternate: false
