@@ -10,7 +10,7 @@ este comportamiento puede cambiar sobreescribiendo las funciones
 Importe `IPCNodeRegister` y registre el IPC:
 
 ```typescript
-import { ipcMain } from 'electron';
+import { ipcMain } from "electron";
 import { IPCNodeRegister } from "ipc-shell"
 
 const ipc = IPCNodeRegister.register("main", ipcMain)
@@ -27,7 +27,7 @@ de la siguiente forma (por la inferencia de tipos lo de arriba
 está bien):
 
 ```typescript
-import { IpcMain, ipcMain } from 'electron';
+import { IpcMain, ipcMain } from "electron";
 import { IPCNode, IPCNodeRegister } from "ipc-shell"
 
 const ipc: IPCNode<IpcMain> = IPCNodeRegister.register("main", ipcMain)
@@ -39,7 +39,7 @@ IPC mediante su nombre:
 ```typescript
 // somewhere else
 
-import { IpcMain } from 'electron';
+import { IpcMain } from "electron";
 import { IPCNodeRegister } from "ipc-shell"
 
 // using generic type (recommended)
