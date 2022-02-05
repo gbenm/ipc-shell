@@ -1,6 +1,8 @@
 import { EventEmitter } from "stream"
 import { IPCBaseNode, IPCNode, IPCHandlers } from "../interfaces"
 import { IPCNodeError, IPCNodeWritable } from "../models"
+import { IPCNodeFilter } from "../models/filter"
+import { IPCNodeReadable } from "../models/readable"
 
 type IPCWWithChannels = {
   send: (channel: string, ...args: unknown[]) => void
@@ -42,5 +44,10 @@ export const ipcNode: IPCBaseNode = {
   },
   writableStream(this: IPCNode<EventEmitter>, channel) {
     return new IPCNodeWritable(channel, this)
+  },
+  _ipcNodeReadable: {} as IPCNodeReadable, // throws error if not overridden
+  readableStream(this: IPCNode<EventEmitter>, channel) {
+    this.on(channel, this._ipcNodeReadable.notify.bind(this._ipcNodeReadable, channel))
+    return this._ipcNodeReadable.pipe(new IPCNodeFilter(channel))
   }
 }

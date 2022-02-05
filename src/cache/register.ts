@@ -1,6 +1,7 @@
 import { IPCNode } from "../interfaces"
 import { ipcNode } from "../implementations"
 import { IPCNodeMod } from "./ipcmod"
+import { IPCNodeReadable } from "../models/readable"
 
 export enum IPCNodeOnDuplicateAction {
   replace,
@@ -30,13 +31,15 @@ export class IPCNodeRegister {
 
     if (this.ipcNodes[name] && onDuplicate === IPCNodeOnDuplicateAction.replace) {
       const ipcMod = Object.assign(ipc, ipcNode);
-      (ipcMod as IPCNodeMod).name = name
+      (ipcMod as IPCNodeMod).name = name;
+      (ipcMod as IPCNodeMod)._ipcNodeReadable = new IPCNodeReadable()
       this.ipcNodes[name] = ipcMod
       return ipcMod
     }
 
     const ipcMod = Object.assign(ipc, ipcNode);
-    (ipcMod as IPCNodeMod).name = name
+    (ipcMod as IPCNodeMod).name = name;
+    (ipcMod as IPCNodeMod)._ipcNodeReadable = new IPCNodeReadable()
     this.ipcNodes[name] = ipcMod
     return ipcMod
   }
