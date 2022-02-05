@@ -9,7 +9,7 @@ este comportamiento puede cambiar sobreescribiendo las funciones
 ## Como usar
 Importe `IPCNodeRegister` y registre el IPC:
 
-```javascript
+```typescript
 import { ipcMain } from 'electron';
 import { IPCNodeRegister } from "ipc-shell"
 
@@ -26,7 +26,7 @@ Note que ahora `ipc` fue extendido. Colocando el tipo sería
 de la siguiente forma (por la inferencia de tipos lo de arriba
 está bien):
 
-```javascript
+```typescript
 import { IpcMain, ipcMain } from 'electron';
 import { IPCNode, IPCNodeRegister } from "ipc-shell"
 
@@ -36,7 +36,7 @@ const ipc: IPCNode<IpcMain> = IPCNodeRegister.register("main", ipcMain)
 A partir de ahora puede acceder en el mismo proceso a este
 IPC mediante su nombre:
 
-```javascript
+```typescript
 // somewhere else
 
 import { IpcMain } from 'electron';
