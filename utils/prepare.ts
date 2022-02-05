@@ -11,4 +11,6 @@ export function prepareIPCNode(ipc: IPCNode<Process | ChildProcess>) {
   ipc._ipcNodeSend = function(this: Process | ChildProcess, _channel, message: Serializable) {
     return this.send?.(message)
   }
+
+  ipc.ipcNodeErrorObjectMode = true
 }

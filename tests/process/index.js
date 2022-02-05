@@ -11,9 +11,24 @@ ipc._getArgsFromOn = function(...args) {
   return args
 }
 
+ipc.ipcNodeErrorObjectMode = true
+
 ipc.on("message", (message) => {
-  if (message == "ping") {
-    ipc.send("pong")
+  switch (message) {
+    case "ping":
+      ipc.send("pong")
+      break
+    case "error":
+      ipc.sendError("message", {
+        isError: true
+      })
+      break
+  }
+})
+
+ipc.subscribe("message", {
+  handleError(error) {
+    ipc.sendError("message", error)
   }
 })
 
