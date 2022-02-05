@@ -13,3 +13,8 @@ principal con las distintas ventanas y viceversa.
     que reimplementar `_getArgsFromOn`, `_ipcNodeSend` y colocar
     `ipcNodeErrorObjectMode` en `true` si quiere que tenga compatibilidad
     con `IPCNodeError`.
+
+!!! warning "Muy importante"
+    - Este paquete utiliza `Object.assign()`.
+    - Todo en la interfaz `IPCBaseNode` se sobreescribe en el objeto
+    que se registra con `IPCNodeRegister.register`.
