@@ -1,7 +1,7 @@
 site_name: IPC Shell
 site_description: A wrapper for the IPC
 site_author: Josué Galeano
-site_url: https://gbenm.github.io
+site_url: https://gbenm.github.io/ipc-shell
 
 repo_name: ipc-shell
 repo_url: https://github.com/gbenm/ipc-shell
