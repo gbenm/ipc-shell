@@ -15,4 +15,5 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: yarn
       - run: yarn build
+      - run: cd tests/process && npm install
       - run: yarn test
