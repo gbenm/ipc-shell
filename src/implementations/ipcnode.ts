@@ -12,15 +12,21 @@ function handleDataOrError<D, E>(this: IPCNode, handlers: IPCHandlers<D, E>, ...
   const firstArg = args[0]
 
   if (firstArg instanceof Error && IPCNodeError.isIPCNodeError(firstArg.message)) {
-    handlers.handleError?.(IPCNodeError.getInfoFromString(firstArg.message) as E)
+    handlers.handleError?.(IPCNodeError.getInfoFromIPCNodeError(firstArg.message) as E)
     return
   }
 
-  handlers.handleData(...args as D[])
+  if (this.ipcNodeErrorObjectMode && firstArg instanceof Object && IPCNodeError.isIPCNodeError(firstArg)) {
+    handlers.handleError?.(IPCNodeError.getInfoFromIPCNodeError(firstArg) as E)
+    return
+  }
+
+  handlers.handleData?.(...args as D[])
 }
 
 export const ipcNode: IPCBaseNode = {
   name: "IPCNode",
+  ipcNodeErrorObjectMode: false,
   subscribe(this: IPCNode<EventEmitter>, channel, handlers) {
     this.on(channel, handleDataOrError.bind(this, handlers))
   },

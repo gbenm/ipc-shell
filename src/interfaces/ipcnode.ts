@@ -7,10 +7,11 @@ import { IPCHandlers } from "../interfaces"
 export interface IPCBaseNode {
   get name(): string
 
+  ipcNodeErrorObjectMode: boolean
   _getArgsFromOn(...args: unknown[]): unknown[] // **IMPORTANT** override if it's necessary
   _ipcNodeSend(channel: string, ...args: unknown[]): void // **IMPORTANT** if it's necessary
   subscribe<D = unknown, E = unknown>(channel: string, handlers: IPCHandlers<D, E>): void
-  sendError(channel: string, info: unknown, message?: string): void
+  sendError(channel: string, info: unknown): void
   writableStream(event: string): IPCNodeWritable
 }
 
