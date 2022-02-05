@@ -6,4 +6,5 @@
 export interface IPCNodeR2TMessage {
   channel: string
   info: unknown
+  error: boolean
 }
