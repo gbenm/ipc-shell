@@ -1,9 +1,10 @@
 import { expect } from "chai"
 import { IPCNodeRegister, IPCNodeOnDuplicateAction } from "../dist"
+import { uniqueTestName } from "../utils/unique"
 
 describe("IPC Cache", () => {
   it ("Get registered ipc", () => {
-    const ipc = { name: "test" }
+    const ipc = { name: uniqueTestName() }
 
     IPCNodeRegister.register(ipc.name, ipc)
     expect(IPCNodeRegister.get(ipc.name)).to.equal(ipc)
@@ -11,7 +12,7 @@ describe("IPC Cache", () => {
 
   it ("Get multiple registered ipcs", () => {
     const ipcs = Array(20).fill(0).map(
-      (_, i) => ({ name:  `multiple-${i+1}` })
+      () => ({ name:  uniqueTestName() })
     )
 
     ipcs.forEach((ipc) => IPCNodeRegister.register(ipc.name, ipc))
@@ -21,14 +22,14 @@ describe("IPC Cache", () => {
 
   describe("Register twice", () => {
     it ("Throw error (action error)", () => {
-      const ipc = { name: "test-twice-error" }
+      const ipc = { name: uniqueTestName() }
 
       IPCNodeRegister.register(ipc.name, ipc)
       expect(() => IPCNodeRegister.register(ipc.name, ipc, IPCNodeOnDuplicateAction.error)).to.throw(Error)
     })
 
     describe ("No throw error (action ignore)", () => {
-      const ipc = { name: "test-twice-ignore" }
+      const ipc = { name: uniqueTestName() }
       IPCNodeRegister.register(ipc.name, ipc)
 
       const ipc2 = { value: 2 }
@@ -45,7 +46,7 @@ describe("IPC Cache", () => {
     })
 
     it ("Replace (action replace)", () => {
-      const ipcName = "test-twice-replace"
+      const ipcName = uniqueTestName()
 
       const ipc = { value: "i'm a IPC" }
 
@@ -60,14 +61,14 @@ describe("IPC Cache", () => {
   })
 
   it ("Throw error if register falsy values", () => {
-    expect(() => IPCNodeRegister.register("test-falsy1", null)).to.throw(Error)
-    expect(() => IPCNodeRegister.register("test-falsy2", undefined)).to.throw(Error)
-    expect(() => IPCNodeRegister.register("test-falsy3", false)).to.throw(Error)
-    expect(() => IPCNodeRegister.register("test-falsy4", 0)).to.throw(Error)
-    expect(() => IPCNodeRegister.register("test-falsy5", "")).to.throw(Error)
+    expect(() => IPCNodeRegister.register(uniqueTestName(), null)).to.throw(Error)
+    expect(() => IPCNodeRegister.register(uniqueTestName(), undefined)).to.throw(Error)
+    expect(() => IPCNodeRegister.register(uniqueTestName(), false)).to.throw(Error)
+    expect(() => IPCNodeRegister.register(uniqueTestName(), 0)).to.throw(Error)
+    expect(() => IPCNodeRegister.register(uniqueTestName(), "")).to.throw(Error)
   })
 
   it ("Throw error getting ipcNode not registered", () => {
-    expect(() => IPCNodeRegister.get("test-ghost")).to.throw(Error) 
+    expect(() => IPCNodeRegister.get(uniqueTestName())).to.throw(Error) 
   })
 })
