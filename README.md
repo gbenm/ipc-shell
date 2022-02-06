@@ -1,5 +1,7 @@
 # IPC Shell
 
+Vea la [página](https://gbenm.github.io/ipc-shell/) para más información.
+
 Es una envoltura para objetos que realizan la comunicación
 entre procesos, en el estado inicial, está configurado para
 funcionar con los IPC de [electron](https://www.electronjs.org/),
