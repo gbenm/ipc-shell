@@ -10,7 +10,7 @@ writable.write({
 ```
 
 Lo anterior crea un Stream de escritura, este cumple ser un
-`stream.Writable`, que puede usar en vez de tener que
+`stream.Writable` (vea [Writable](https://nodejs.org/api/stream.html#class-streamwritable)), que puede usar en vez de tener que
 utilizar `ipc.send("channel", "información")`, esto le puede
 servir si tiene algún tipo de servicio que sea `stream.Readable`
 o similares, y en vez de tener que subscribirse a "data", puede
@@ -18,7 +18,7 @@ utilizar `.pipe(writable)`.
 
 Explicando el ejemplo lo que se está haciendo es enviando el
 objeto { title, message }, por el canal "notifications", este
-readable tiene la opción de mandar objetos, pero esto debe
+writable tiene la opción de mandar objetos, pero esto debe
 ser soportado de igual manera por la función send del IPC.
 
 !!! tip "Errores"

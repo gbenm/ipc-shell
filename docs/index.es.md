@@ -46,16 +46,6 @@ const ipc = IPCNodeRegister.register("main", ipcMain)
     la extensión de los tipos sin tener errores antes de 
     compilar si se está usando typescript, claro :smile:.
 
-Si desea anotar el tipo:
-
-=== "Typescript"
-```typescript
-import { IpcMain, ipcMain } from "electron";
-import { IPCNode, IPCNodeRegister } from "ipc-shell"
-
-const ipc: IPCNode<IpcMain> = IPCNodeRegister.register("main", ipcMain)
-```
-
 A partir de ahora puede acceder en el mismo proceso a este
 IPC mediante su nombre:
 
