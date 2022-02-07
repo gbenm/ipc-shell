@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#comenzar" class="md-skip">
+        <a href="#home" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Comenzar
+              Home
             
           </span>
         </div>
@@ -227,9 +227,25 @@
 
   <li class="md-tabs__item">
     <a href="." class="md-tabs__link md-tabs__link--active">
-      Comenzar
+      Home
     </a>
   </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="reference/" class="md-tabs__link">
+        Reference
+      </a>
+    </li>
+  
 
       
     </ul>
@@ -294,12 +310,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Comenzar
+          Home
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="." class="md-nav__link md-nav__link--active">
-        Comenzar
+        Home
       </a>
       
         
@@ -324,10 +340,121 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#como-usarlo" class="md-nav__link">
+    Cómo usarlo
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/" class="md-nav__link">
+        Compatibilidad ChildProcess y Process
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/readable/" class="md-nav__link">
+        Readable (Stream)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/send/" class="md-nav__link">
+        Enviar errores
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/subscribe/" class="md-nav__link">
+        Escuchar mensajes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/writable/" class="md-nav__link">
+        Writable (Stream)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -365,6 +492,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#como-usarlo" class="md-nav__link">
+    Cómo usarlo
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -382,7 +516,7 @@
 </a>
 
 
-<h1 id="comenzar">Comenzar</h1>
+<h1 id="home">Home</h1>
 <h2 id="contexto">Contexto</h2>
 <p>Este paquete para Nodejs es una extensión de funcionalidades para objetos
 que se encargan de <strong>inter-process communication (IPC)</strong>. Un ejemplo de esto
@@ -405,6 +539,73 @@ con <code>IPCNodeError</code>.</p>
 que se registra con <code>IPCNodeRegister.register</code>.</li>
 </ul>
 </div>
+<h2 id="como-usarlo">Cómo usarlo</h2>
+<p>Lo primero es que debe registar su IPC, a este se le hará un extensión con
+algunos métodos que le pueden ser de utilidad, además le permitirá
+tener a su disponibilidad los IPC que registre en un scope global de ese
+proceso.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Typescript/Javascript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">import</span> <span class="p">{</span> <span class="nx">ipcMain</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;electron&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="k">import</span> <span class="p">{</span> <span class="nx">IPCNodeRegister</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;ipc-shell&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="kd">const</span> <span class="nx">ipc</span> <span class="o">=</span> <span class="nx">IPCNodeRegister</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="nx">ipcMain</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Nota</p>
+<p>Se usará <code>IpcMain</code> como el tipo de IPC, si
+fuera para el <code>ipcRenderer</code> debería usar <code>IpcRenderer</code>,
+para el ipc de <code>win.webContents</code> debería usar <code>WebContents</code>,
+hablando en términos de Electronjs, en general usar
+la clase del IPC que registra</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Chequeo de tipo</p>
+<p>La razón que se coloque el tipo es para que pueda obtener
+la extensión de los tipos sin tener errores antes de 
+compilar si se está usando typescript, claro <img alt="😄" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f604.svg" title=":smile:" />.</p>
+</div>
+<p>A partir de ahora puede acceder en el mismo proceso a este
+IPC mediante su nombre:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Typescript - Recomendado</label><label for="__tabbed_2_2">Typescript - Otro</label><label for="__tabbed_2_3">Javascript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1">// somewhere else</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="k">import</span> <span class="p">{</span> <span class="nx">IpcMain</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;electron&quot;</span><span class="p">;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="k">import</span> <span class="p">{</span> <span class="nx">IPCNodeRegister</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;ipc-shell&quot;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="kd">const</span> <span class="nx">ipc</span> <span class="o">=</span> <span class="nx">IPCNodeRegister</span><span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">IpcMain</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1">// somewhere else</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="k">import</span> <span class="p">{</span> <span class="nx">IpcMain</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;electron&quot;</span><span class="p">;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="k">import</span> <span class="p">{</span> <span class="nx">IPCNodeRegister</span><span class="p">,</span> <span class="nx">IPCNode</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;ipc-shell&quot;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="kd">const</span> <span class="nx">ipc</span>: <span class="kt">IPCNode</span><span class="o">&lt;</span><span class="nx">IpcMain</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">IPCNodeRegister</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">import</span> <span class="p">{</span> <span class="nx">IpcMain</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;electron&quot;</span><span class="p">;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="k">import</span> <span class="p">{</span> <span class="nx">IPCNodeRegister</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;ipc-shell&quot;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="cm">/**</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="cm"> * @typedef {import(&quot;ipc-shell&quot;).IPCNode} IpcNode</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="cm"> * @typedef {import(&quot;electron&quot;).IpcMain} IpcMain</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="cm"> *</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="cm"> * @type {IpcNode &amp; IpcMain}</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="cm"> */</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="kd">const</span> <span class="nx">ipc</span> <span class="o">=</span> <span class="nx">IPCNodeRegister</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>En el caso de Javascript se importó los tipos y se les dio
+otro nombre con <code>@typedef</code>, así que deberá cambiar
+el tipo de <code>IpcMain</code> si es que usa JsDoc para sus tipos.</p>
 
               
             </article>
@@ -414,6 +615,26 @@ que se registra con <code>IPCNodeRegister.register</code>.</li>
       </main>
       
         <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+      
+        
+        <a href="reference/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Compatibilidad ChildProcess y Process" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              Compatibilidad ChildProcess y Process
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
